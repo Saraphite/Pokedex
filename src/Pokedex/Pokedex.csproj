@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Pokedex.Abstractions\Pokedex.Abstractions.csproj" />
+    <ProjectReference Include="..\Pokedex.Resources.PokeAPI\Pokedex.Resources.PokeAPI.csproj" />
   </ItemGroup>
 
 
