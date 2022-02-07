@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Pokedex.Abstractions
+﻿namespace Pokedex.Abstractions
 {
     public enum Habitat
     {
-        Cave = 0,
-        Forest = 1,
-        Grassland = 2,
-        Mountain = 3,
-        Rare = 4,
-        RoughTerrain = 5,
-        Sea = 6,
-        Urban = 7,
-        WatersEdge = 8
+        Unknown = 0,
+        Cave = 1,
+        Forest = 2,
+        Grassland = 3,
+        Mountain = 4,
+        Rare = 5,
+        RoughTerrain = 6,
+        Sea = 7,
+        Urban = 8,
+        WatersEdge = 9
     }
 }
