@@ -38,6 +38,8 @@ namespace Pokedex.Resources.Funtranslations
             content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
             var response = await _httpClient.PostAsync(Methods.Shakespeare, content);
 
+            response.EnsureSuccessStatusCode();
+
             return JsonSerializer.Deserialize<TranslationResponse>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
@@ -54,6 +56,8 @@ namespace Pokedex.Resources.Funtranslations
             var content = new FormUrlEncodedContent(values);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
             var response = await _httpClient.PostAsync(Methods.Yoda, content);
+
+            response.EnsureSuccessStatusCode();
 
             return JsonSerializer.Deserialize<TranslationResponse>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions
             {
