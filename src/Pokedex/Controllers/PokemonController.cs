@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Pokedex.Abstractions;
 using Pokedex.Managers.Pokemon;
 using System.Threading.Tasks;
 
@@ -20,18 +19,24 @@ namespace Pokedex.Controllers
 
         [HttpGet]
         [Route("[controller]/{name}")]
-        public async Task<Pokemon> GetAsync([FromRoute] string name)
+        public async Task<IActionResult> GetAsync([FromRoute] string name)
         {
             _logger.LogTrace($"GET request received for Pokemon: {name}.");
-            return await _pokemonManager.GetPokemonAsync(name);
+            var pokemon = await _pokemonManager.GetPokemonAsync(name);
+
+            if (pokemon == null) return NotFound(null);
+            return Ok(pokemon);
         }
 
         [HttpGet]
         [Route("[controller]/translated/{name}")]
-        public async Task<Pokemon> GetWithTranslationAsync([FromRoute] string name)
+        public async Task<IActionResult> GetWithTranslation([FromRoute] string name)
         {
             _logger.LogTrace($"GET request received for translated Pokemon: {name}.");
-            return await _pokemonManager.GetTranslatedPokemonAsync(name);
+            var pokemon = await _pokemonManager.GetTranslatedPokemonAsync(name);
+
+            if (pokemon == null) return NotFound(null);
+            return Ok(pokemon);
         }
     }
 }
