@@ -27,6 +27,7 @@ namespace Pokedex.Resources.Funtranslations
             _logger = logger;
         }
 
+        //<inheritdoc />
         public async Task<Translation> GetTranslationAsync(string text, Language language)
         {
             //Check the cache for a value that we've already accessed. This has performance benefits as well as keeping licence-based request limits to a minimum.

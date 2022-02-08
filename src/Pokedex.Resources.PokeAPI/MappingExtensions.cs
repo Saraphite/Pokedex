@@ -1,11 +1,13 @@
 ﻿using PokeApiNet;
 using Pokedex.Abstractions;
-using System;
 
 namespace Pokedex.Resources.PokeAPI
 {
     internal static class MappingExtensions
     {
+        /// <summary>
+        /// Converts the PokeApiNet Habitat object to Habitat enum.
+        /// </summary>
         public static Habitat ToHabitat(this PokemonHabitat habitat)
         {
             switch (habitat.Name)

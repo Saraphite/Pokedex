@@ -19,6 +19,11 @@ namespace Pokedex.Managers.Pokemon
             _logger = logger;
         }
 
+        /// <summary>
+        /// Gets a Pokémon based on the name.
+        /// </summary>
+        /// <param name="name">The name of the Pokémon.</param>
+        /// <returns>The Pokémon.</returns>
         public async Task<Abstractions.Pokemon> GetPokemonAsync(string name)
         {
             try
@@ -32,6 +37,11 @@ namespace Pokedex.Managers.Pokemon
             }
         }
 
+        /// <summary>
+        /// Gets a Pokémon based on the name, with a translated description based on some rules.
+        /// </summary>
+        /// <param name="name">The name of the Pokémon.</param>
+        /// <returns>The Pokémon.</returns>
         public async Task<Abstractions.Pokemon> GetTranslatedPokemonAsync(string name)
         {
             Abstractions.Pokemon pokemon;

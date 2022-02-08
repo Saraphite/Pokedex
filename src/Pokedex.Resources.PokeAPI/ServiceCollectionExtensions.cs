@@ -6,6 +6,9 @@ namespace Pokedex.Resources.PokeAPI
 {
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Adds the PokeAPI Resource to the Service Collection.
+        /// </summary>
         public static IServiceCollection AddPokeAPIResource(this IServiceCollection services)
         {
             /* Here we're using a third-party package (PokeApiNet) for communicating with the PokeAPI. 

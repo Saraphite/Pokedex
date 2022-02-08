@@ -25,6 +25,7 @@ namespace Pokedex.Resources.PokeAPI
             _logger = logger;
         }
 
+        //<inheritdoc />
         public async Task<Pokemon> GetAsync(string name)
         {
             try
