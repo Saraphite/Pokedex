@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Pokedex.Managers.Pokemon;
+using Pokedex.Resources.Funtranslations;
 using Pokedex.Resources.PokeAPI;
 
 namespace Pokedex
@@ -20,7 +22,13 @@ namespace Pokedex
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddMemoryCache();
+            //Add resources.
             services.AddPokeAPIResource();
+            services.AddFuntranslationsResource(Configuration);
+
+            //Add managers.
+            services.AddPokemonManager();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
