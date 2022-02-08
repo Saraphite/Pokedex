@@ -58,7 +58,7 @@ namespace Pokedex.Resources.Funtranslations
                 translation = new Translation
                 {
                     Language = language,
-                    Text = response.Contents.Translated
+                    Text = response.Contents?.Translated
                 };
 
                 _cache.Set($"{nameof(language)}_{text}", translation, cacheEntryOptions);
