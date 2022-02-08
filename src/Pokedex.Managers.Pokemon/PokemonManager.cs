@@ -21,12 +21,55 @@ namespace Pokedex.Managers.Pokemon
 
         public async Task<Abstractions.Pokemon> GetPokemonAsync(string name)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _pokemonRepository.GetAsync(name);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("An exception occurred while trying to retrieve a Pokemon from the Pokemon repository.", e);
+                throw;
+            }
         }
 
         public async Task<Abstractions.Pokemon> GetTranslatedPokemonAsync(string name)
         {
-            throw new NotImplementedException();
+            Abstractions.Pokemon pokemon;
+            try
+            {
+                pokemon = await _pokemonRepository.GetAsync(name);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("An exception occurred while trying to retrieve a Pokemon from the Pokemon repository.", e);
+                throw;
+            }
+
+            if (pokemon == null)
+            {
+                return null;
+            }
+
+            Translation translation = null;
+            try
+            {
+                if (pokemon.Habitat == Abstractions.Habitat.Cave || pokemon.IsLegendary)
+                {
+                    translation = await _translationRepository.GetTranslationAsync(pokemon.Description, Language.Yoda);
+                }
+                else
+                {
+                    translation = await _translationRepository.GetTranslationAsync(pokemon.Description, Language.Shakespeare);
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"An exception occurred while trying to translate a Pokemon's description.", e);
+            }
+
+            pokemon.Description = translation == null ? pokemon.Description : translation.Text;
+
+            return pokemon;
         }
     }
 }
