@@ -4,6 +4,7 @@ using Pokedex.Data.Pokemon;
 using Pokedex.Data.Pokemon.Exceptions;
 using System;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using PokeApiPokemon = PokeApiNet.Pokemon;
 using Pokemon = Pokedex.Abstractions.Pokemon;
@@ -39,6 +40,12 @@ namespace Pokedex.Resources.PokeAPI
                 };
 
                 return result;
+            }
+            //I am not a fan of this. As of .NET 5 HttpRequestException has a 'StatusCode' property, however as we are working in .NET Core 3.1 we have to work around this inconvenience.
+            catch (HttpRequestException hre) when (hre.Message.Contains("404 (Not Found)"))
+            {
+                _logger.LogTrace("A non-existent Pokémon was requested.");
+                return null;
             }
             catch (Exception e)
             {
