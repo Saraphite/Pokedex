@@ -13,6 +13,7 @@ namespace Pokedex.Resources.PokeAPI
              * a) ensure that the design meets any standards I have.
              * b) ensure that I have ownership over any performance issues.
              * c) ensure that any new updates to the API (which may break the client used here) are quickly resolvable without reliance on a third-party.
+             * d) configure the BaseAddress of the HttpClient. This package does not support this as far as I can ascertain.
              */
             services.AddHttpClient<PokeApiClient>();
             services.AddSingleton<IPokemonRepository, PokemonRepository>();
