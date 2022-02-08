@@ -16,6 +16,9 @@ namespace Pokedex.Resources.PokeAPI
         private readonly PokeApiClient _client;
         private readonly ILogger<PokemonRepository> _logger;
 
+        //In a production setting I would read this from the Accept-Language header (and remove variant, for example "-gb" in "en-gb") to give the user the description in their expected language.
+        private const string DescriptionLanguage = "en";
+
         public PokemonRepository(PokeApiClient client, ILogger<PokemonRepository> logger)
         {
             _client = client;
@@ -30,11 +33,15 @@ namespace Pokedex.Resources.PokeAPI
                 var species = await _client.GetResourceAsync(pokemon.Species);
                 var habitat = await _client.GetResourceAsync(species.Habitat);
 
+                //Sanitise the description from carriage returns etc.
+                var description = species.FlavorTextEntries.FirstOrDefault(fte => fte.Language.Name == DescriptionLanguage).FlavorText;
+                description = description.Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " ").Replace("\f", " ");
+
                 var result = new Pokemon()
                 {
                     Id = pokemon.Id,
                     Name = pokemon.Name,
-                    Description = species.FlavorTextEntries.FirstOrDefault().FlavorText,
+                    Description = description,
                     Habitat = habitat.ToHabitat(),
                     IsLegendary = species.IsLegendary
                 };
