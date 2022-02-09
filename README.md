@@ -17,7 +17,7 @@ dotnet run
 ## Running the API via Docker
 
 - Install Docker for Desktop, available from https://docs.docker.com/get-docker/
-- From the root directory of this file run the following commands.
+- From the root directory of this repository run the following commands.
 ```
 docker build -t pokedex .
 docker run -d -p 8080:80 --name pokedex pokedex
